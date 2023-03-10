@@ -1,0 +1,13 @@
+.container {
+    display: flex;
+    padding: 10px;
+}
+
+.card {
+    padding: 10px;
+}
+
+.content {
+    text-align: left;
+    padding: 5px;
+}
