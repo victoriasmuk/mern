@@ -19,11 +19,17 @@ export const Main = (props) => {
     const removeFromDom = productId => {
         setProducts(products.filter(product => product._id != productId));
     };
+    const createProduct = product => {
+        axios.post('http://localhost:8000/api/products/new', product)
+            .then(res => {
+                setProducts([...products, res.data]);
+            })
+    }
 
     return (
         <div className='container'>
             <h1>Product Manager</h1>
-            <ProductForm />
+            <ProductForm onSubmitProp={createProduct} initialTitle="" initialPrice="" initialDescription="" />
             <hr />
             {loaded && <ProductList products={products} removeFromDom={removeFromDom} />}
         </div>

@@ -3,19 +3,14 @@ import axios from 'axios'
 
 
 export const ProductForm = (props) => {
-    const [title, setTitle] = useState('');
-    const [price, setPrice] = useState('');
-    const [description, setDescription] = useState('');
+    const {initialTitle, initialPrice, initialDescription, onSubmitProp} = props;
+    const [title, setTitle] = useState(initialTitle);
+    const [price, setPrice] = useState(initialPrice);
+    const [description, setDescription] = useState(initialDescription);
     const onSubmitHandler = e => {
         e.preventDefault();
-        axios.post('http://localhost:8000/api/products/new', {
-            title,
-            price,
-            description
-        })
-            .then(res=>console.log(res))
-            .catch(err=>console.log(err))
-    }
+        onSubmitProp({title, price, description});
+        }
     return (
         <form onSubmit={onSubmitHandler}>
             <div className='form-floating mb-3'>
@@ -30,7 +25,7 @@ export const ProductForm = (props) => {
                 <input className='form-control' type="text" onChange={(e) => setDescription(e.target.value)} value={description} />
                 <label className='form-label'>Description</label>
             </div>
-            <input className='btn btn-primary mb-3' type="submit" value='Create'/>
+            <input className='btn btn-primary mb-3' type="submit" />
         </form>
     );
 };
